@@ -2,7 +2,7 @@
 
 본 레포지토리는 삼성 멀티캠퍼스에서 18/19년 진행됐던 프로젝트입니다.
 
-![ssmc](./ssmc_poster.jpg){: width='50%' height='50%'}
+<img src = './ssmc_poster.jpg' width='50%' height='50%'>
 
 ---
 
@@ -30,12 +30,12 @@
 ---
 
 ## 사용된 데이터
-`식품안전나라 홈페이지`(www.foodsafetykorea.go.kr)를 통해서 **식품영양성분 DB**를 다운로드하여 13,000개의 데이터를 전처리 후 사용가능하게 가공하였습니다.
+**식품안전나라 홈페이지**(www.foodsafetykorea.go.kr)를 통해서 **식품영양성분 DB**를 다운로드하여 약 13,000개의 데이터를 전처리 후 사용가능하게 가공하였습니다.
 
 ---
 
-## 레포지토리 구성
-- 웹 프로그래밍
+## 자료 구성
+- Web Programming
     - static
         - data
         - dist
@@ -47,8 +47,11 @@
     - templates
         - mod
 
-- 데이터 베이스
-    - 
+- Database
+    - user
+    - food
+    - nutrient_m
+    - nutrient_w
 
 ---
 
