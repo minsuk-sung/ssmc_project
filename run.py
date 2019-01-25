@@ -6,25 +6,19 @@ app=Flask(__name__)
 
 app.secret_key= 'qweasdzxc'
 
-config= {
-    'site_title':'점심 메뉴 단가 분석',
-    'menu1':'Today`s 코스닥 150',
-    'login':'로그인',
-    'menu2':'파일업로드'
-}
 
 @app.route('/')
 def main():
     # 세션이 없으면 로그인으로
-    if not 'user_id' in session:
-        return redirect( url_for( 'login' ) )
-    return render_template('main.html', config =config)
+    # if not 'user_id' in session:
+    #     return redirect( url_for( 'login' ) )
+    return render_template('main.html')
 
 @app.route('/login',methods=['GET','POST'])
 def login():
     if  request.method == 'GET':
         # GET
-        return render_template('login.html', config =config)
+        return render_template('login.html')
     else:  
          uid = request.form['uid']
          upw = request.form['upw']
