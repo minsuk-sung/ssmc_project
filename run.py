@@ -18,9 +18,10 @@ def main():
 def login():
     if  request.method == 'GET':
         # GET
-        return render_template('login.html')
+        return render_template('header.html')
     else:  
          uid = request.form['uid']
+         print(uid)
          upw = request.form['upw']
          row = loginSql(uid,upw)
          if row:

@@ -72,12 +72,158 @@ fieldset{
 }
 a{
 	text-decoration: none;
+	color:black;
+	
 }
+/* ######################################################로그인 css#####################################################*/
+#mask {
+	display: none;
+	background: #000;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+	z-index: 999;
+}
+
+.login-popup {
+	display: none;
+	
+	padding: 10px;
+	border: 2px solid #ddd;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 99999;
+	box-shadow: 0px 0px 20px #999;
+	/* CSS3 */
+		-moz-box-shadow: 0px 0px 20px #999;
+	/* Firefox */
+		-webkit-box-shadow: 0px 0px 20px #999;
+	/* Safari, Chrome */
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px;
+	/* Firefox */
+		-webkit-border-radius: 3px;
+	/* Safari, Chrome */;
+}
+
+img.btn_close {
+	Position the close button
+	float: right;
+	/*margin: -28px -28px 0 0;*/
+	margin: 0 auto;
+}
+
+fieldset {
+	border: none;
+	background-color: white;
+}
+
+form.signin .textbox label {
+	display: block;
+	padding-bottom: 7px;
+}
+
+form.signin .textbox span {
+	display: block;
+}
+
+form.signin p, form.signin span {
+	color: #999;
+	font-size: 11px;
+	line-height: 18px;
+}
+
+form.signin .textbox input {
+	background: #666666;
+	border-bottom: 1px solid #333;
+	border-left: 1px solid #000;
+	border-right: 1px solid #333;
+	border-top: 1px solid #000;
+	color: #fff;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font: 13px Arial, Helvetica, sans-serif;
+	padding: 6px 6px 4px;
+	width: 200px;
+}
+
+form.signin input:-moz-placeholder {
+	color: #bbb;
+	text-shadow: 0 0 2px #000;
+}
+
+form.signin input::-webkit-input-placeholder {
+	color: #bbb;
+	text-shadow: 0 0 2px #000;
+}
+
+.button {
+	background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
+	background: -o-linear-gradient(top, #f3f3f3, #dddddd);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f3f3f3', EndColorStr='#dddddd');
+	border-color: #000;
+	border-width: 1px;
+	border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	color: #333;
+	cursor: pointer;
+	display: inline-block;
+	padding: 6px 6px 4px;
+	margin-top: 10px;
+	font: 12px;
+	width: 214px;
+}
+
+.button:hover {
+	background: #ddd;
+}    
+
 </style>
 <body>
+
+
+	{#  엔터로 로그인하는 함수 #}
+<script type="text/javascript">
+    function onEnterLogin(){
+        var keyCode = window.event.keyCode;
+        if (keyCode == 13) { 
+            loginForm.submit();
+        }
+    }
+</script>
 <nav id="cap-area">
-	{#이 부분에서 로그인 링크를 페이지 연결해야함.#}	
-	<div class="menu"><a href="">login</a></div>
+<div onkeydown="javascript:onEnterLogin();">
+	<a href="#login-box" class="login-window"><b style="float:right">Login / Sign In</b></a>
+
+	{# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@로그인 폼@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #}
+	<div id="login-box" class="login-popup">
+			<a href="#" class="close"><img src="/static/images/error.png" width="30" height"30" class="btn_close" title="Close Window" alt="Close" /></a>
+			  <form  method="post" class="signin" name ="loginForm">
+					<fieldset class="textbox">
+						<label class="username">
+							<span>Username or email</span>
+							<input id="username" name="uid" value="" type="text" width="100" autocomplete="on" placeholder="Username">
+						</label>
+						<label class="password">
+							<span>Password</span>
+							<input id="password" name="upw" value="" type="password" placeholder="Password">
+						</label>
+						<button class="submit button" type="button">Sign in</button>
+					</fieldset>
+			  </form>
+			</div>
+		</div>
+
 	<div><a href=""><img src="/static/images/login.png" width="80" height"80"/></a></div>
 </nav>
 <div id="header-area">
@@ -87,11 +233,12 @@ a{
 	</p>
 	<div style="margin-top:30px">
 	<span class='green_window'>
-			<input type='text' class='input_text' placeholder="음식을검색하세요" />
+			<input type='text' class='input_text' placeholder="음식을 검색하세요" />
 		</span>
 		<button type='submit' class='sch_smit'>검색</button>
 	</div>
 </div>
+
 
 {#                                                 로그인 레이어 팝업                                             #}
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
