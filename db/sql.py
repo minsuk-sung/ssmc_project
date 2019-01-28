@@ -38,7 +38,7 @@ def loginSql( uid, upw ):
     return row
 
 # 회원가입하는 함수
-def signin(uname,uid,upw,age,sex,weight,height):
+def signin(uname,uid,upw,age,sex,weight,height,active):
     connection = None
     result = 0 # 로그인 결과를 담는 변수
     try:
@@ -56,11 +56,11 @@ def signin(uname,uid,upw,age,sex,weight,height):
             with connection.cursor() as cursor:
                 sql    ='''
                 INSERT INTO users
-                (`uname`,`uid`,`upw`,`age`,`sex`,`weight`,`height`)
+                (`uname`,`uid`,`upw`,`age`,`sex`,`weight`,`height`,`active`)
                 VALUES
-                (%s,%s,%s,%s,%s,%s,%s)
+                (%s,%s,%s,%s,%s,%s,%s,%s)
                 '''
-                cursor.execute( sql,(uname,uid,upw,age,sex,weight,height) )
+                cursor.execute( sql,(uname,uid,upw,age,sex,weight,height,active) )
                 connection.commit()
                 result = connection.affected_rows() # 1이 되야지 성공
             #####################################################
@@ -74,6 +74,39 @@ def signin(uname,uid,upw,age,sex,weight,height):
     return result
 
 # main 검색창에서 요청한 음식을 DB로부터 가져오는 함수 -> ajax에서 쓸 용도
+def selectFoodData():
+    connection = None
+    rows       = None # 주식정보들을 담는 변수
+    try:
+        connection = my.connect(host='localhost', # 디비 주소
+                            user='root',      # 디비 접속 계정
+                            password='12341234', # 디지 접속 비번
+                            db='ssmc_project',   # 데이터베이스 이름
+                            #port=3306,        # 포트     
+                            charset='utf8',
+                            cursorclass=my.cursors.DictCursor) # 커서타입지정
+        # 쿼리수행
+        with connection.cursor() as cursor:            
+            sql    = '''
+                select 
+                   * 
+                from 
+                    food
+                order by category asc
+                limit 0, 10;
+            '''
+            cursor.execute( sql )
+            # 여러개 데이터를 다 가져올때
+            rows    = cursor.fetchall()            
+    except Exception as e:
+        print('->', e)
+        rows = None
+    finally:
+        if connection:
+            connection.close()
+    return rows
+
+
 def searchFoodAjax(foodname):
     connection = None
     row = None # 로그인 결과를 담는 변수
@@ -91,10 +124,9 @@ def searchFoodAjax(foodname):
             #####################################################
             with connection.cursor() as cursor:
                 sql    = '''
-                    SELECT foodname,kcal
+                    SELECT *
                     FROM food
                     WHERE foodname LIKE '%%%s%%'
-                    LIMIT 0, 10;
                 ''' % (foodname)
                 cursor.execute( sql )
                 row    = cursor.fetchall()  # 하나의 row를 뽑을때
@@ -108,6 +140,38 @@ def searchFoodAjax(foodname):
             print('DB Close : Find Food')
     return row
 
+# DB로 먹은 음식 데이터 
+def insertFoodData(uid,fid):
+    connection = None
+    result     = 0 # 수정결과
+    try:
+        connection = my.connect(host='localhost', # 디비 주소
+                            user='root',      # 디비 접속 계정
+                            password='12341234', # 디지 접속 비번
+                            db='ssmc_project',   # 데이터베이스 이름
+                            #port=3306,        # 포트     
+                            charset='utf8',
+                            cursorclass=my.cursors.DictCursor) # 커서타입지정
+        # 쿼리수행
+        with connection.cursor() as cursor:            
+            sql    = '''
+                INSERT INTO meals
+                (`uid`,`fid`)
+                VALUES
+                (%s,%s)
+            '''
+            cursor.execute( sql,(uid,meal_time,fid) )
+            
+        connection.commit()
+        result = connection.affected_rows() # 1이 되야지 성공
+        
+    except Exception as e:
+        print('->', e)
+        result = 0
+    finally:
+        if connection:
+            connection.close()
+    return result
 # DB에서 모든 정보를 가지고오는 함수
 # def searchFoodNutrient(foodname):
 
@@ -140,5 +204,6 @@ if __name__ == '__main__':
         'sex':'m',
         'height':170,
         'weight':70
-    }
-    print(signin(info))
+     }
+    # print(signin(info))
+    

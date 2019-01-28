@@ -1,0 +1,81 @@
+<html>
+<style>
+table.type06 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 10px;
+}
+table.type06 th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+}
+table.type06 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+}
+.aaa{
+    text-align: left;
+    padding-left: 30px;
+    padding-top:20px;
+}
+
+tr:nth-child(even) {
+    background: rgb(210, 210, 236);
+}
+</style>
+<body>
+    <table id="info" class="type06">
+        <div class="aaa"> 총 {{count}}개의 결과</div>
+<thead>
+    <tr>
+        <th>카테고리</th>
+        <th>음식이름</th>
+        <th>1회 제공량</th>
+        <th>kcal</th>
+        <th>탄수화물</th>
+        <th>단백질</th>
+        <th>지방</th>
+        <th>당</th>
+        <th>나트륨</th>
+        <th>콜레스테롤</th>
+        <th>포화지방산</th>
+        <th>트랜스지방산</th>
+        <th>등록하기</th>
+    </tr>
+</thead>
+<tbody>
+        {% for food in foods %}
+                  
+        <tr id="result">
+            <td>{{ food ['category']}}</td>
+            <td>{{ food ['foodname']}}</td>
+            <td>{{ food ['per']}}</td>
+            <td>{{ food ['kcal']}}</td>
+            <td>{{ food ['carbo']}}</td>
+            <td>{{ food ['protein']}}</td>
+            <td>{{ food ['fat']}}</td>
+            <td>{{ food ['sugar']}}</td>
+            <td>{{ food ['natrium']}}</td>
+            <td>{{ food ['chole']}}</td>
+            <td>{{ food ['satfat']}}</td>
+            <td>{{ food ['transfat']}}</td>  
+            <td>등록</td>
+            
+        
+            <!-- <form>
+                    <td><input type="submit" value="등록"/></td>
+            </form> -->
+        </tr>
+        
+    {% endfor %}    
+    </tbody>
+</table>
+
+</body>
+</html>
