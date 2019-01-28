@@ -52,7 +52,7 @@ def join2():
     weight = request.form['weight']
     height = request.form['height']
     
-    row = signin(uid,upw,uname,age,sex,weight,height)
+    row = signin(uname,uid,upw,age,sex,weight,height)
     return render_template('signin2.html')
       
 
