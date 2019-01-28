@@ -1,0 +1,106 @@
+<html>
+<style>
+#cap-area{
+height:60px;
+overflow: hidden;
+}
+b{
+	float:right;
+	margin-top:30px;
+}
+
+#header-area{
+	background-image: url('static/images/header.jpg');
+	border: solid 1px;
+	text-align: center;
+	height:400px;
+	margin-top:10px;
+}
+h1{
+	margin:0px;
+	padding-left:30px;
+	font-size: 50px;
+	
+	text-align: left;
+}
+body{
+	width:1278.4px;
+	margin:0 auto;
+}
+p{
+	text-align: center;
+	color:white;
+	margin-top:80px;
+	padding: 0px 100px;
+}
+
+/*############################################ 검색 창CSS############################################*/
+fieldset{
+	background-color: aqua;
+}
+.green_window {
+	display: inline-block;
+	width: 366px; height: 34px;
+	border: 3px solid #bcffb9;
+	border-radius: 30px;
+	background: white;
+}
+.input_text {
+	width: 348px; height: 21px;
+	margin: 6px 0 0 9px;
+	border: 0;
+	line-height: 21px;
+	font-weight: bold;
+	font-size: 16px;
+	outline: none;
+}
+.sch_smit {
+	width: 54px; height: 40px;
+	margin: 0; border: 0;
+	vertical-align: top;
+	background-color: #bcffb9;
+	color: black;
+	font-weight: bold;
+	border-radius: 30px;
+	cursor: pointer;
+}
+.sch_smit:hover {
+	background: #bcffb9;
+}
+.menu{
+	margin:20px 20px 0px 0px;
+	width:100px;
+	text-align:right;
+	float:right;
+	
+}
+a{
+	text-decoration: none;
+	color:black;
+	
+}
+</style>
+<body>
+<div id="cap-area">
+    <div>
+        <a href="http://localhost:5000/logout"><b>Logout</b></a>
+        <!-- <a href=""><img src="/static/images/login.png" width="80" height"80"/></a> -->
+        <h1>24</h1>
+		
+    </div>
+</div>
+
+<div id="header-area">
+        <p>Lorem Ipsum "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."<br>
+            "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..." What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining 
+        </p>
+        <div style="margin-top:30px">
+        <span class='green_window'>
+                <input type='text' class='input_text' placeholder="음식을 검색하세요" />
+        </span>
+                <button type='submit' class='sch_smit'>검색</button>
+        </div>
+</div>
+</body>
+</html>
