@@ -74,7 +74,7 @@ def signin(uname,uid,upw,age,sex,weight,height,active):
     return result
 
 # main 검색창에서 요청한 음식을 DB로부터 가져오는 함수 -> ajax에서 쓸 용도
-def selectFoodData():
+def selectFoodData(fid):
     connection = None
     rows       = None # 주식정보들을 담는 변수
     try:
@@ -88,13 +88,10 @@ def selectFoodData():
         # 쿼리수행
         with connection.cursor() as cursor:            
             sql    = '''
-                select 
-                   * 
-                from 
-                    food
-                order by category asc
-                limit 0, 10;
-            '''
+                SELECT * 
+                FROM food
+                WHERE fid=%s
+            '''%fid
             cursor.execute( sql )
             # 여러개 데이터를 다 가져올때
             rows    = cursor.fetchall()            
@@ -106,8 +103,7 @@ def selectFoodData():
             connection.close()
     return rows
 
-
-def searchFoodAjax(foodname):
+def searchFoods(foodname):
     connection = None
     row = None # 로그인 결과를 담는 변수
     try:
@@ -136,6 +132,7 @@ def searchFoodAjax(foodname):
         row = None
     finally:
         if connection:
+            print('Found Food : %s'%foodname)
             connection.close()
             print('DB Close : Find Food')
     return row
@@ -160,7 +157,7 @@ def insertFoodData(uid,fid):
                 VALUES
                 (%s,%s)
             '''
-            cursor.execute( sql,(uid,meal_time,fid) )
+            cursor.execute( sql,(uid,fid) )
             
         connection.commit()
         result = connection.affected_rows() # 1이 되야지 성공
@@ -172,6 +169,7 @@ def insertFoodData(uid,fid):
         if connection:
             connection.close()
     return result
+
 # DB에서 모든 정보를 가지고오는 함수
 # def searchFoodNutrient(foodname):
 
@@ -179,7 +177,7 @@ def insertFoodData(uid,fid):
 # def searchUserInfo(uid):
 
 # 사용자가 1일간 먹은 음식
-# def userOnePeriod(uid):
+def userOnePeriod(uid):
     connection = None
     row = None # 로그인 결과를 담는 변수
     try:

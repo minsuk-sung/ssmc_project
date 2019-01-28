@@ -46,12 +46,11 @@ tr:nth-child(even) {
         <th>콜레스테롤</th>
         <th>포화지방산</th>
         <th>트랜스지방산</th>
-        <th>등록하기</th>
+        <th></th>
     </tr>
 </thead>
 <tbody>
         {% for food in foods %}
-        
         <tr>
             <td>{{ food ['category']}}</td>
             <td>{{ food ['foodname']}}</td>
@@ -65,11 +64,12 @@ tr:nth-child(even) {
             <td>{{ food ['chole']}}</td>
             <td>{{ food ['satfat']}}</td>
             <td>{{ food ['transfat']}}</td>
-                
-
-            <form>
-                    <td><input type="submit" value="등록"/></td>
-            </form>
+            <td>
+                <form method="POST" form action = "http://localhost:5000/add"  >
+                    <input type="hidden" name=fid value="{{food['fid']}}"/>
+                    <input type="submit" value='추가'>
+                </form>
+            </td>
         </tr>
         
     {% endfor %}    
