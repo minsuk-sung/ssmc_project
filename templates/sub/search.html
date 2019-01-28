@@ -51,8 +51,8 @@ tr:nth-child(even) {
 </thead>
 <tbody>
         {% for food in foods %}
-                  
-        <tr id="result">
+        
+        <tr>
             <td>{{ food ['category']}}</td>
             <td>{{ food ['foodname']}}</td>
             <td>{{ food ['per']}}</td>
@@ -64,13 +64,12 @@ tr:nth-child(even) {
             <td>{{ food ['natrium']}}</td>
             <td>{{ food ['chole']}}</td>
             <td>{{ food ['satfat']}}</td>
-            <td>{{ food ['transfat']}}</td>  
-            <td>등록</td>
-            
-        
-            <!-- <form>
+            <td>{{ food ['transfat']}}</td>
+                
+
+            <form>
                     <td><input type="submit" value="등록"/></td>
-            </form> -->
+            </form>
         </tr>
         
     {% endfor %}    
