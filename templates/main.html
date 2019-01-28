@@ -1,18 +1,22 @@
 <html>
-	<head>
-		<title>main</title>
+<head>
+<title>main</title>
 		
-	</head>
-	<body>
-	<div>
+</head>
+<body>
+<div>
+	{% if not 'user_id' in session: %}
 		{% include 'mod/header.html' ignore missing %}
-	</div>
-	<div>
-		{% include 'mod/contents.html' ignore missing %}
-	</div>
-	<div>
-		{% include 'mod/footer.html' ignore missing %}
-	</div>
-	
-	</body>
-	</html>		
+    {% else: %}
+		{% include 'mod/header2.html' ignore missing %}
+	{% endif %}  
+</div>
+<div>
+	{% include 'mod/contents.html' ignore missing %}
+</div>
+<div>
+	{% include 'mod/footer.html' ignore missing %}
+</div>
+
+</body>
+</html>		

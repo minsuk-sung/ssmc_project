@@ -4,15 +4,21 @@
 </head>
 <style>
 #cap-area{
-	height:80px;
+	height:60px;
 	overflow: hidden;
+}
+b{
+	float:right;
+	margin-top:30px;
 }
 #header-area{
 	background-image: url('static/images/header.jpg');
 	border: solid 1px;
 	text-align: center;
-	height:300px;
+	height:330px;
 	margin-top:10px;
+	padding:150px;
+	overflow: hidden;
 }
 h1{
 	margin:0px;
@@ -22,7 +28,7 @@ h1{
 	text-align: left;
 }
 body{
-	width:1278.4px;
+	
 	margin:0 auto;
 }
 p{
@@ -31,18 +37,19 @@ p{
 	margin-top:80px;
 	padding: 0px 100px;
 }
+/*############################################ 검색 창CSS############################################*/
 fieldset{
 	background-color: aqua;
 }
 .green_window {
 	display: inline-block;
-	width: 366px; height: 34px;
+	width: 700px; height: 45px;
 	border: 3px solid #bcffb9;
 	border-radius: 30px;
 	background: white;
 }
 .input_text {
-	width: 348px; height: 21px;
+	width: 600px; height: 40px;
 	margin: 6px 0 0 9px;
 	border: 0;
 	line-height: 21px;
@@ -153,7 +160,14 @@ form.signin .textbox input {
 	font: 13px Arial, Helvetica, sans-serif;
 	padding: 6px 6px 4px;
 	width: 200px;
+	
 }
+form.signin .textbox a {
+	text-align: center;
+	font: 13px Arial, Helvetica, sans-serif;
+	width: 200px;
+}
+
 
 form.signin input:-moz-placeholder {
 	color: #bbb;
@@ -164,6 +178,7 @@ form.signin input::-webkit-input-placeholder {
 	color: #bbb;
 	text-shadow: 0 0 2px #000;
 }
+
 
 .button {
 	background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
@@ -203,12 +218,12 @@ form.signin input::-webkit-input-placeholder {
 </script>
 <nav id="cap-area">
 <div onkeydown="javascript:onEnterLogin();">
-	<a href="#login-box" class="login-window"><b style="float:right">Login / Sign In</b></a>
+	<a href="#login-box" class="login-window"><b>Login / Sign In</b></a>
 
 	{# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@로그인 폼@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #}
 	<div id="login-box" class="login-popup">
 			<a href="#" class="close"><img src="/static/images/error.png" width="30" height"30" class="btn_close" title="Close Window" alt="Close" /></a>
-			  <form  method="post" class="signin" name ="loginForm">
+			  <form action="http://localhost:5000/login" method="post" class="signin" name ="loginForm">
 					<fieldset class="textbox">
 						<label class="username">
 							<span>Username or email</span>
@@ -218,16 +233,25 @@ form.signin input::-webkit-input-placeholder {
 							<span>Password</span>
 							<input id="password" name="upw" value="" type="password" placeholder="Password">
 						</label>
-						<button class="submit button" type="button">Sign in</button>
+
+							<input  type="submit" value="Login"><br>
+							<a href="http://localhost:5000/join" value ="signin">sign in</a>
 					</fieldset>
-			  </form>
+					
+				</form>
 			</div>
 		</div>
 
-	<div><a href=""><img src="/static/images/login.png" width="80" height"80"/></a></div>
+	<div>
+		<!-- <a href=""><img src="/static/images/login.png" width="80" height"80"/></a> -->
+		<h1>FoodBalance</h1>
+	</div>
 </nav>
+
+
 <div id="header-area">
-	<p>Lorem Ipsum "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."<br>
+	<h1 style="color:white">Food balance</h1>
+	<p> Ipsum "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
 		"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..." What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
 		It has survived not only five centuries, but also the leap into electronic typesetting, remaining 
 	</p>

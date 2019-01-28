@@ -38,7 +38,7 @@ def loginSql( uid, upw ):
     return row
 
 # 회원가입하는 함수
-def signin(info):
+def signin(uname,uid,upw,age,sex,weight,height):
     connection = None
     result = 0 # 로그인 결과를 담는 변수
     try:
@@ -60,7 +60,7 @@ def signin(info):
                 VALUES
                 (%s,%s,%s,%s,%s,%s,%s)
                 '''
-                cursor.execute( sql,tuple(info.values()) )
+                cursor.execute( sql,(uname,uid,upw,age,sex,weight,height) )
                 connection.commit()
                 result = connection.affected_rows() # 1이 되야지 성공
             #####################################################

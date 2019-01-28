@@ -1,17 +1,4 @@
--- --------------------------------------------------------
--- 호스트:                          127.0.0.1
--- 서버 버전:                        8.0.13 - MySQL Community Server - GPL
--- 서버 OS:                        Win64
--- HeidiSQL 버전:                  9.5.0.5196
--- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- 테이블 python_db.food 구조 내보내기
 CREATE TABLE IF NOT EXISTS `food` (
   `fid` int(11) NOT NULL AUTO_INCREMENT COMMENT '번호',
   `category` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '식품군',
