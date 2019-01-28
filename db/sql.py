@@ -108,6 +108,40 @@ def searchFoodAjax(foodname):
             print('DB Close : Find Food')
     return row
 
+# DB로 먹은 음식 데이터 
+def insertFoodData(uid,meal_time,fid):
+    connection = None
+    result     = 0 # 수정결과
+    try:
+        connection = my.connect(host='localhost', # 디비 주소
+                            user='root',      # 디비 접속 계정
+                            password='12341234', # 디지 접속 비번
+                            db='ssmc_project',   # 데이터베이스 이름
+                            #port=3306,        # 포트     
+                            charset='utf8',
+                            cursorclass=my.cursors.DictCursor) # 커서타입지정
+        # 쿼리수행
+        with connection.cursor() as cursor:            
+            sql    = '''
+                INSERT INTO meals
+                (`uid`,`fid`)
+                VALUES
+                (%s,%s)
+            '''
+            cursor.execute( sql,(uid,meal_time,fid) )
+            
+        connection.commit()
+        result = connection.affected_rows() # 1이 되야지 성공
+        
+    except Exception as e:
+        print('->', e)
+        result = 0
+    finally:
+        if connection:
+            connection.close()
+    return result
+
+
 # DB에서 모든 정보를 가지고오는 함수
 # def searchFoodNutrient(foodname):
 
@@ -115,7 +149,39 @@ def searchFoodAjax(foodname):
 # def searchUserInfo(uid):
 
 # 사용자가 1일간 먹은 음식
-# def userOnePeriod(uid,):
+# def userOnePeriod(uid):
+    connection = None
+    row = None # 로그인 결과를 담는 변수
+    try:
+        connection = my.connect(host='localhost', # DB 주소
+                                user='root',      # DB 접속 계정
+                                password='12341234', # DB 접속 비번
+                                db='ssmc_project',   # Database 이름
+                                #port=3306,        # Port     
+                                charset='utf8',
+                                cursorclass=my.cursors.DictCursor) # Cursor Type
+
+        if connection:
+            print('DB OPEN : Find Food')
+            #####################################################
+            with connection.cursor() as cursor:
+                sql    = '''
+                    SELECT foodname,kcal
+                    FROM food
+                    WHERE foodname LIKE '%%%s%%'
+                    LIMIT 0, 10;
+                ''' % (uid)
+                cursor.execute( sql )
+                row    = cursor.fetchall()  # 하나의 row를 뽑을때
+            #####################################################
+    except Exception as e:
+        print('->', e)
+        row = None
+    finally:
+        if connection:
+            connection.close()
+            print('DB Close : Find Food')
+    return row
 
 # 사용자가 1주일간 먹은 음식
 # def userOneWeek(uid):

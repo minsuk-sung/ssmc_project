@@ -257,49 +257,81 @@ form.signin input::-webkit-input-placeholder {
 	</p>
 	<div style="margin-top:30px">
 	<span class='green_window'>
-			<input type='text' class='input_text' placeholder="음식을 검색하세요" />
+			<input type='text' class='input_text' placeholder="음식을 검색하세요" id='searchFood' />
 		</span>
 		<button type='submit' class='sch_smit'>검색</button>
 	</div>
 </div>
 
-
 {#                                                 로그인 레이어 팝업                                             #}
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-                <script>    
-                $(document).ready(function() {
-                        $('a.login-window').click(function() {
-                            
-                                    //Getting the variable's value from a link 
-                            var loginBox = $(this).attr('href');
-                        
-                            //Fade in the Popup
-                            $(loginBox).fadeIn(300);
-                            
-                            //Set the center alignment padding + border see css style
-                            var popMargTop = ($(loginBox).height() + 24) / 2; 
-                            var popMargLeft = ($(loginBox).width() + 24) / 2; 
-                            
-                            $(loginBox).css({ 
-                                'margin-top' : -popMargTop,
-                                'margin-left' : -popMargLeft
-                            });
-                            
-                            // Add the mask to body
-                            $('body').append('<div id="mask"></div>');
-                            $('#mask').fadeIn(300);
-                            
-                            return false;
-                        });
-                        
-                        // When clicking on the button close or the mask layer the popup closed
-                        $('a.close, #mask').live('click', function() { 
-                          $('#mask , .login-popup').fadeOut(300 , function() {
-                            $('#mask').remove();  
-                        }); 
-                        return false;
-                        });
-                        });
-                    </script>
+<script>    
+$(document).ready(function() {
+		$('a.login-window').click(function() {
+			
+					//Getting the variable's value from a link 
+			var loginBox = $(this).attr('href');
+		
+			//Fade in the Popup
+			$(loginBox).fadeIn(300);
+			
+			//Set the center alignment padding + border see css style
+			var popMargTop = ($(loginBox).height() + 24) / 2; 
+			var popMargLeft = ($(loginBox).width() + 24) / 2; 
+			
+			$(loginBox).css({ 
+				'margin-top' : -popMargTop,
+				'margin-left' : -popMargLeft
+			});
+			
+			// Add the mask to body
+			$('body').append('<div id="mask"></div>');
+			$('#mask').fadeIn(300);
+			
+			return false;
+		});
+		
+		// When clicking on the button close or the mask layer the popup closed
+		$('a.close, #mask').live('click', function() { 
+			$('#mask , .login-popup').fadeOut(300 , function() {
+			$('#mask').remove();  
+		}); 
+		return false;
+		});
+		});
+</script>
+
+<script>
+	$(function(){
+		$( "#searchFood" ).autocomplete({
+			source : function( request, response ) {
+				 $.ajax({
+						type: 'post',
+						url: "json.txt",
+						dataType: "json",
+						//request.term = $("#autocomplete").val()
+						data: { value : request.term },
+						success: function(data) {
+							//서버에서 json 데이터 response 후 목록에 뿌려주기 위함
+							response(
+								$.map(data, function(item) {
+									return {
+										label: item.data,
+										value: item.data
+									}
+								})
+							);
+						}
+				   });
+				},
+			//조회를 위한 최소글자수
+			minLength: 2,
+			select: function( event, ui ) {
+				// 만약 검색리스트에서 선택하였을때 선택한 데이터에 의한 이벤트발생
+			}
+		});
+	})
+</script>
+
 </body>
 </html>
