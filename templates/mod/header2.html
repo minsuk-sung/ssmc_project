@@ -85,11 +85,13 @@ a{
 <body>
 <div id="cap-area">
     <div>
-        <a href="http://localhost:5000/logout"><b>Logout</b></a>
+		<a href="http://localhost:5000/logout"><b>Logout</b></a>
+		<b>&nbsp|&nbsp</b>
+		<a href="http://localhost:5000/mypage"><b>Mypage</b></a>
         <!-- <a href=""><img src="/static/images/login.png" width="80" height"80"/></a> -->
-        <h1>24</h1>
-		
-    </div>
+        <a href="http://localhost:5000/"><h1>Foodbalance</h1></a>
+	</div>
+	
 </div>
 
 <div id="header-area">
@@ -99,11 +101,15 @@ a{
 		It has survived not only five centuries, but also the leap into electronic typesetting, remaining 
 	</p>
 	<div style="margin-top:30px">
+	<form action="http://localhost:5000/foodlist" method="POST" id="searchForm">
 	<span class='green_window'>
-			<input type='text' class='input_text' placeholder="음식을 검색하세요" />
+			<input type='text' class='input_text' name="keyword" id="searchFood" placeholder="음식을 검색하세요" />
 		</span>
-		<button type='submit' class='sch_smit'>검색</button>
+		<!-- <button type='submit' class='sch_smit'>검색</button> -->
+		<input type="submit" class='sch_smit' value='검색'>
+	</form>
 	</div>
 </div>
+	
 </body>
 </html>

@@ -5,7 +5,7 @@
 #contents-area{
     
     text-align: center;
-    height: 500px;
+    overflow: hidden;
 }	
 #section{
     margin:50 0 0 30;
@@ -35,17 +35,14 @@ h2{
 
 </style>
 <body>
-    <div id ="contents-area">
-        <div><h2 style="margin-left:30px">&nbsp건강 정보 </h2></div>
-        <div id="section">
-            <img class="section" src="/static/images/info.jpg" width="350" height"350" />
-            <a htef="http://health.chosun.com/site/data/html_dir/2017/08/31/2017083102260.html"></a>
-        </div>
-        <div id='section2'>
-                <a htef="http://health.chosun.com/site/data/html_dir/2017/08/31/2017083102260.html">건강수명늘리는 5가지 식습관</a>
-           
-        </div>
-</div>
+    <div id="contents-area">
+    {% if foods: %}
+        {% include 'sub/search.html' ignore missing %}
+    {% else: %}
+        {% include 'sub/info.html' ignore missing %}
+    {% endif %}
+    </div>  
 
+    
 </body>
 </html>		
