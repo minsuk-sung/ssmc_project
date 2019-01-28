@@ -75,6 +75,14 @@ def add():
     else:
         return jsonify([])
 
+@app.route('/search',methods=['POST'])
+def search():
+    rows = searchFoods(request.form['keyword'])
+    if rows :
+        return jsonify(rows)
+    else:
+        return jsonify([])
+
 
 if __name__ == '__main__':# 이코드를 메인으로 구동시 서버가동
     app.run(debug=True)
