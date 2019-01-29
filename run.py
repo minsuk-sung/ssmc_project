@@ -13,17 +13,17 @@ def main():
 # 로그인
 @app.route('/login',methods=['POST'])
 def login():
-         uid = request.form['uid']
-         print(uid)
-         upw = request.form['upw']
-         row = loginSql(uid,upw)
-         if row:
-             # 세션생성
-             session['user_id']= uid
-             session['user_nm']= row['uname']
-             # 홈페이지로 이동    
-             return redirect(url_for('main') )
-         else:
+        uid = request.form['uid']
+        print(uid)
+        upw = request.form['upw']
+        row = loginSql(uid,upw)
+        if row:
+            # 세션생성
+            session['user_id']= uid
+            session['user_nm']= row['uname']
+            # 홈페이지로 이동    
+            return redirect(url_for('main') )
+        else:
             return render_template('error.html', msg='아이디 비번확인 요청')
 
 @app.route('/logout')
@@ -35,14 +35,15 @@ def logout():
         session.pop('user_nm',None)
     # 홈페이지 이동
     return redirect(url_for('main'))
+
 # 회원가입 홈페이지 띄어주는 함수
 @app.route('/join')
 def join():
      return render_template('signin.html')
+
 # 회원가입 함수
 @app.route('/join2',methods=['POST'])
-def join2():
-    
+def join2():  
     uid = request.form['uid']
     upw = request.form['upw']
     uname = request.form['uname']
@@ -54,21 +55,38 @@ def join2():
     
     row = signin(uname,uid,upw,age,sex,weight,height)
     return render_template('signin2.html')
+
 # 음식데이터를 메인에 띄어주기위한 함수
 @app.route('/foodlist',methods=['POST'])
 def foodinfo():
-    food_from_db = searchFoodAjax(request.form['keyword'])
-    
-    return render_template('main.html',foods=food_from_db,count=len(food_from_db))
-
-@app.route('/mypage',methods=['POST'])
+    food_from_db = searchFoods(request.form['keyword'])
+    if food_from_db:
+        return render_template('main.html',foods=food_from_db,count=len(food_from_db))
+    else:
+        return render_template('sub/add.html',msg="해당 음식이 없습니다.")
+@app.route('/mypage')
 def mypage():
-    return render_template('mypage.html',fid=request.form['fid'])
+    uid =session['user_id']
+    add_result_db = searchRecentFood(uid,10)
+    return render_template('mypage.html',foods=add_result_db,count=len(add_result_db))
 
 @app.route('/add',methods=['POST'])
 def add():
-    fid = searchFoodAjax(request.form['foodname'])['fid']
-    return render_template('mypage.html' ,add_food = insertFoodData(request.form['uid'],fid) )
+    fid = request.form['fid']
+    inbun= request.form['inbun']
+    try:
+        uid = session['user_id'] # sessin.get('user_id', 'aaa')
+        insertFoodData(uid,fid,inbun)
+        return render_template("sub/add.html",msg="추가되었습니다")
+    except Exception as err:
+        return render_template("sub/add.html",msg="로그인이 필요합니다")
+
+@app.route('/deletefood',methods=['POST'])
+def deletefood():
+    fid = request.form['fid']
+    uid = session['user_id']
+    deleteFoodData(uid,fid)
+    return render_template("sub/delete.html",msg="삭제되었습니다",url='http://localhost:5000/mypage')
     
 
 if __name__ == '__main__':# 이코드를 메인으로 구동시 서버가동
