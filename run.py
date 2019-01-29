@@ -58,16 +58,18 @@ def join2():
 @app.route('/foodlist',methods=['POST'])
 def foodinfo():
     food_from_db = searchFoodAjax(request.form['keyword'])
+    
     return render_template('main.html',foods=food_from_db,count=len(food_from_db))
 
-@app.route('/mypage')
+@app.route('/mypage',methods=['POST'])
 def mypage():
-    return render_template('mypage.html')
+    return render_template('mypage.html',fid=request.form['fid'])
 
 @app.route('/add',methods=['POST'])
 def add():
     fid = searchFoodAjax(request.form['foodname'])['fid']
     return render_template('mypage.html' ,add_food = insertFoodData(request.form['uid'],fid) )
     
+
 if __name__ == '__main__':# 이코드를 메인으로 구동시 서버가동
     app.run(debug=True)
