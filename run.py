@@ -70,18 +70,16 @@ def mypage():
 def add():
     fid = request.form['fid']
     rows = selectFoodData(fid)
-    if rows :
-        return jsonify(rows)
+    # if rows :
+    #     return jsonify(rows)
+    # else:
+    #     return jsonify([])
+    print(session['user_id'])
+    if session['user_id']:
+        insertFoodData(session['user_id'],fid)
+        return render_template("sub/add.html",msg="추가되었습니다." )
     else:
-        return jsonify([])
-
-@app.route('/search',methods=['POST'])
-def search():
-    rows = searchFoods(request.form['keyword'])
-    if rows :
-        return jsonify(rows)
-    else:
-        return jsonify([])
+        return render_template("sub/add.html",msg="로그인해주세요.")
 
 
 if __name__ == '__main__':# 이코드를 메인으로 구동시 서버가동
