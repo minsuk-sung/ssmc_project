@@ -59,23 +59,19 @@ def join2():
 # 음식데이터를 메인에 띄어주기위한 함수
 @app.route('/foodlist',methods=['POST'])
 def foodinfo():
-    food_from_db = searchFoods(request.form['keyword'])
+    food_from_db = searchFoodAjax(request.form['keyword'])
+    
     return render_template('main.html',foods=food_from_db,count=len(food_from_db))
 
 @app.route('/mypage',methods=['POST'])
 def mypage():
-    return render_template('mypage.html')
+    return render_template('mypage.html',fid=request.form['fid'])
 
 @app.route('/add',methods=['POST'])
 def add():
-    fid = request.form['fid']
-    gram = request.form['gram']
-    uid = session['user_id']
-    if 'user_id' in session:
-        insertFoodData(uid,fid,gram)
-        return render_template("sub/add.html",msg="추가되었습니다." )
-    else:
-        return render_template("sub/add.html",msg="로그인해주세요.")
+    fid = searchFoodAjax(request.form['foodname'])['fid']
+    return render_template('mypage.html' ,add_food = insertFoodData(request.form['uid'],fid) )
+    
 
 if __name__ == '__main__':# 이코드를 메인으로 구동시 서버가동
     app.run(debug=True)

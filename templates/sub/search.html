@@ -64,12 +64,13 @@ tr:nth-child(even) {
             <td>{{ food ['chole']}}</td>
             <td>{{ food ['satfat']}}</td>
             <td>{{ food ['transfat']}}</td>
-            <td>
-                <form method="POST" form action = "http://localhost:5000/add"  >
-                    <input type="text" name='gram' placeholder="g수 입력"/> 
-                    <input type="hidden" name='fid' value="{{food['fid']}}"/>
-                    <input type="submit" value='추가'>
-            </td>
+                
+
+            <form method="POST" action="/mypage">
+                    
+                    <td><input type="submit" value="등록"/></td>
+                    <td><input type="text" hidden="hidden" name="fid" placeholder="{{food['fid']}}"/></td>
+            </form>
         </tr>
         
     {% endfor %}    
