@@ -84,9 +84,9 @@ def add():
 
 @app.route('/deletefood',methods=['POST'])
 def deletefood():
-    fid = request.form['fid']
+    mid = request.form['mid']
     uid = session['user_id']
-    deleteFoodData(uid,fid)
+    deleteFoodData(uid,mid)
     return render_template("sub/delete.html",msg="삭제되었습니다",url='http://localhost:5000/mypage')
     
 

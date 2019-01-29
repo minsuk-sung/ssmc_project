@@ -79,8 +79,7 @@ p{
 </div>
 
 <div id ="tablechart-area">
-		<table id="info" class="type06">
-			
+		<table id="info" class="type06">	
 		<thead>
 		<tr>
 			<th>날짜</th>
@@ -115,7 +114,7 @@ p{
 				<td>{{ food ['transfat']}}</td>
 				<td>
 					<form method="POST" form action = "http://localhost:5000/deletefood"  > 
-						<input type="hidden" name='fid' value="{{food['fid']}}"/>
+						<input type="hidden" name='mid' value="{{food['mid']}}"/>
 						<input type="submit" value='삭제'>
 					</form>
 				</td>

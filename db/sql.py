@@ -170,7 +170,7 @@ def insertFoodData(uid,fid,inbun):
             connection.close()
     return result
 
-def deleteFoodData(uid,fid):
+def deleteFoodData(uid,mid):
     connection = None
     result     = 0 # 수정결과
     try:
@@ -186,9 +186,9 @@ def deleteFoodData(uid,fid):
             sql    = '''
                 DELETE
                 FROM meals
-                WHERE uid = %s and fid = %s
+                WHERE uid=%s and mid=%s
             '''
-            cursor.execute( sql,(uid,fid) )
+            cursor.execute( sql,(uid,mid) )
             
         connection.commit()
         result = connection.affected_rows() # 1이 되야지 성공
