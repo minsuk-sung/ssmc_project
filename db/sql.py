@@ -138,7 +138,7 @@ def searchFoods(foodname):
     return row
 
 # DB로 먹은 음식 데이터 
-def insertFoodData(uid,fid,gram):
+def insertFoodData(uid,fid,inbun):
     connection = None
     result     = 0 # 수정결과
     try:
@@ -153,11 +153,11 @@ def insertFoodData(uid,fid,gram):
         with connection.cursor() as cursor:            
             sql    = '''
                 INSERT INTO meals
-                (`uid`,`fid`,`gram`)
+                (`uid`,`fid`,`inbun`)
                 VALUES
                 (%s,%s,%s)
             '''
-            cursor.execute( sql,(uid,fid,gram) )
+            cursor.execute( sql,(uid,fid,inbun) )
             
         connection.commit()
         result = connection.affected_rows() # 1이 되야지 성공
@@ -207,44 +207,6 @@ def deleteFoodData(uid,fid):
 # 사용자가 입력해둔 개인정보를 가져오는 함수 -> 키 / 몸무게 등
 # def searchUserInfo(uid):
 
-# 최근 음식 데이터 갯수
-def searchRecentFood(uid,n):
-    connection = None
-    row = None # 로그인 결과를 담는 변수
-    try:
-        connection = my.connect(host='localhost', # DB 주소
-                                user='root',      # DB 접속 계정
-                                password='12341234', # DB 접속 비번
-                                db='ssmc_project',   # Database 이름
-                                #port=3306,        # Port     
-                                charset='utf8',
-                                cursorclass=my.cursors.DictCursor) # Cursor Type
-
-        if connection:
-            print('DB OPEN : Find Food')
-            #####################################################
-            with connection.cursor() as cursor:
-                sql    = '''
-                    select *
-                    from meals
-                    left outer join food 
-                    on meals.fid = food.fid
-                    where meals.uid=%s
-                    order by date desc
-                    LIMIT 0, %s;
-                '''
-                cursor.execute( sql, (uid,n) )
-                row    = cursor.fetchall()  # 하나의 row를 뽑을때
-            #####################################################
-    except Exception as e:
-        print('->', e)
-        row = None
-    finally:
-        if connection:
-            connection.close()
-            print('DB Close : Find Food')
-    return row
-
 # 사용자가 1일간 먹은 음식
 def userOnePeriod(uid):
     connection = None
@@ -280,6 +242,42 @@ def userOnePeriod(uid):
             print('DB Close : Find Food')
     return row
 
+def searchRecentFood(uid,n):
+    connection = None
+    row = None # 로그인 결과를 담는 변수
+    try:
+        connection = my.connect(host='localhost', # DB 주소
+                                user='root',      # DB 접속 계정
+                                password='12341234', # DB 접속 비번
+                                db='ssmc_project',   # Database 이름
+                                #port=3306,        # Port     
+                                charset='utf8',
+                                cursorclass=my.cursors.DictCursor) # Cursor Type
+
+        if connection:
+            print('DB OPEN : Find Food')
+            #####################################################
+            with connection.cursor() as cursor:
+                sql    = '''
+                    select *
+                    from meals
+                    left outer join food 
+                    on meals.fid = food.fid
+                    where meals.uid=%s
+                    order by date desc
+                    LIMIT 0, %s;
+                '''
+                cursor.execute( sql,(uid,n) )
+                row    = cursor.fetchall()  # 하나의 row를 뽑을때
+            #####################################################
+    except Exception as e:
+        print('->', e)
+        row = None
+    finally:
+        if connection:
+            connection.close()
+            print('DB Close : Find Food')
+    return row
 # 사용자가 1주일간 먹은 음식
 # def userOneWeek(uid):
 

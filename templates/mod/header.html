@@ -13,6 +13,8 @@ b{
 }
 #header-area{
 	background-image: url('static/images/header.jpg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 	border: solid 1px;
 	text-align: center;
 	height:330px;
@@ -257,6 +259,7 @@ form.signin input::-webkit-input-placeholder {
 		It has survived not only five centuries, but also the leap into electronic typesetting, remaining 
 	</p>
 	<div style="margin-top:30px">
+		{# ######################################################## 검색 ##################################################}
 	<form action="http://localhost:5000/foodlist" method="POST" id="searchForm">
 	<span class='green_window'>
 			<input type='text' class='input_text' name="keyword" id="searchFood" placeholder="음식을 검색하세요" />
