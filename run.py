@@ -6,25 +6,25 @@ app=Flask(__name__)
 
 app.secret_key= 'qweasdzxc'
 
-
 @app.route('/')
 def main():
     return render_template('main.html')
+
 # 로그인
 @app.route('/login',methods=['POST'])
 def login():
-        uid = request.form['uid']
-        print(uid)
-        upw = request.form['upw']
-        row = loginSql(uid,upw)
-        if row:
-            # 세션생성
-            session['user_id']= uid
-            session['user_nm']= row['uname']
-            # 홈페이지로 이동    
-            return redirect(url_for('main') )
-        else:
-            return render_template('error.html', msg='아이디 비번확인 요청')
+    uid = request.form['uid']
+    print(uid)
+    upw = request.form['upw']
+    row = loginSql(uid,upw)
+    if row:
+        # 세션생성
+        session['user_id']= uid
+        session['user_nm']= row['uname']
+        # 홈페이지로 이동    
+        return redirect(url_for('main') )
+    else:
+        return render_template('error.html', msg='아이디 비번확인 요청')
 
 @app.route('/logout')
 def logout():
@@ -39,7 +39,7 @@ def logout():
 # 회원가입 홈페이지 띄어주는 함수
 @app.route('/join')
 def join():
-     return render_template('signin.html')
+    return render_template('signin.html')
 
 # 회원가입 함수
 @app.route('/join2',methods=['POST'])
@@ -74,14 +74,13 @@ def mypage():
 def add():
     fid = request.form['fid']
     inbun= request.form['inbun']
-    rows = selectFoodData(fid)
-
-    uid = session['user_id']
-    if 'user_id'in session:
+    try:
+        uid = session['user_id'] # sessin.get('user_id', 'aaa')
         insertFoodData(uid,fid,inbun)
         return render_template("sub/add.html",msg="추가되었습니다")
-    else:  
-        return render_template("sub/add.html",msg="로그인해주세요" )
+    except Exception as err:
+        return render_template("sub/add.html",msg="로그인이 필요합니다")
+        
 
 @app.route('/deletefood',methods=['POST'])
 def deletefood():
