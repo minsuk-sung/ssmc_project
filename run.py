@@ -69,13 +69,10 @@ def mypage():
 @app.route('/add',methods=['POST'])
 def add():
     fid = request.form['fid']
-    rows = selectFoodData(fid)
-    # if rows :
-    #     return jsonify(rows)
-    # else:
-    #     return jsonify([])
+    gram = request.form['gram']
+    uid = session['user_id']
     if 'user_id' in session:
-        insertFoodData(session['user_id'],fid)
+        insertFoodData(uid,fid,gram)
         return render_template("sub/add.html",msg="추가되었습니다." )
     else:
         return render_template("sub/add.html",msg="로그인해주세요.")

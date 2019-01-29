@@ -66,9 +66,9 @@ tr:nth-child(even) {
             <td>{{ food ['transfat']}}</td>
             <td>
                 <form method="POST" form action = "http://localhost:5000/add"  >
-                    <input type="hidden" name=fid value="{{food['fid']}}"/>
+                    <input type="text" name='gram' placeholder="g수 입력"/> 
+                    <input type="hidden" name='fid' value="{{food['fid']}}"/>
                     <input type="submit" value='추가'>
-                </form>
             </td>
         </tr>
         
