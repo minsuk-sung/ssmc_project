@@ -74,13 +74,11 @@ def add():
     #     return jsonify(rows)
     # else:
     #     return jsonify([])
-    print(session['user_id'])
-    if session['user_id']:
+    if 'user_id' in session:
         insertFoodData(session['user_id'],fid)
         return render_template("sub/add.html",msg="추가되었습니다." )
     else:
         return render_template("sub/add.html",msg="로그인해주세요.")
-
 
 if __name__ == '__main__':# 이코드를 메인으로 구동시 서버가동
     app.run(debug=True)
