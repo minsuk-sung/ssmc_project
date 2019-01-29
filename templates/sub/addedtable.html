@@ -35,7 +35,7 @@
             <td>{{ food ['transfat']}}</td>
             <td>
                 <form method="POST" form action = "http://localhost:5000/deletefood"  > 
-                    <input type="hidden" name='fid' value="{{food['fid']}}"/>
+                    <input type="hidden" name='mid' value="{{food['mid']}}"/>
                     <input type="submit" value='삭제'>
                 </form>
             </td>
