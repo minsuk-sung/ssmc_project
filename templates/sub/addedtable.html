@@ -1,0 +1,48 @@
+
+    <table id="info" class="type06">
+        
+    <thead>
+    <tr>
+        <th>날짜</th>
+        <th>음식이름</th>
+        <th>1회 제공량</th>
+        <th>kcal</th>
+        <th>탄수화물</th>
+        <th>단백질</th>
+        <th>지방</th>
+        <th>당</th>
+        <th>나트륨</th>
+        <th>콜레스테롤</th>
+        <th>포화지방산</th>
+        <th>트랜스지방산</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for food in foods %}
+        <tr>
+            <td>{{ food ['date']}}</td>
+            <td>{{ food ['foodname']}}</td>
+            <td>{{ food ['per']}}</td>
+            <td>{{ food ['kcal']}}</td>
+            <td>{{ food ['carbo']}}</td>
+            <td>{{ food ['protein']}}</td>
+            <td>{{ food ['fat']}}</td>
+            <td>{{ food ['sugar']}}</td>
+            <td>{{ food ['natrium']}}</td>
+            <td>{{ food ['chole']}}</td>
+            <td>{{ food ['satfat']}}</td>
+            <td>{{ food ['transfat']}}</td>
+            <td>
+                <form method="POST" form action = "http://localhost:5000/deletefood"  > 
+                    <input type="hidden" name='fid' value="{{food['fid']}}"/>
+                    <input type="submit" value='삭제'>
+                </form>
+            </td>
+
+        </tr>
+        </div>
+    {% endfor %}    
+    </tbody>
+    </table>
+

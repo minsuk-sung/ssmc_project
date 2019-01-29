@@ -29,7 +29,31 @@ p{
 	margin-top:80px;
 	padding: 0px 100px;
 }
+#profile-area{
+	background-image: url('static/images/diet.jpg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	margin:0 auto;
+	border:solid 1px;
+	height:500px;
+}
+#pychart-area{
+	border:solid 1px;
+	height:500px;
+	background-color:darkgrey;
+}
+#barchart-area{
+	border:solid 1px;
+	height:500px;
+	background-color:darkgoldenrod;
+}
+
+#tablechart-area{
+	
+	
+}
 </style>
+
 <body>
 <div id="cap-area">
         <div>
@@ -38,10 +62,31 @@ p{
             <a href="http://localhost:5000/mypage"><b>Mypage</b></a>
             <!-- <a href=""><img src="/static/images/login.png" width="80" height"80"/></a> -->
             <a href="http://localhost:5000/"><h1>Foodbalance</h1></a>
-		</div>
-		
-       
+        </div>       
 </div>
 
-{{fid}}
+<div id ="profile-area">
+	<h1>Profile</h1>
+</div>
+
+<div id ="pychart-area">
+	<h1>pychart</h1>
+</div>
+
+
+<div id ="barchart-area">
+	<h1>barchart</h1>
+</div>
+
+
+<div>
+{% if foods: %}
+	{% include 'sub/addedtable.html' ignore missing %}
+{% endif %} 
+</div>
+
+
+<div>
+	{% include 'mod/footer.html' ignore missing %}
+</div>
 </body>
