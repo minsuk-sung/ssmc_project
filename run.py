@@ -68,7 +68,31 @@ def foodinfo():
 def mypage():
     uid =session['user_id']
     add_result_db = searchRecentFood(uid,10)
-    return render_template('mypage.html',foods=add_result_db,count=len(add_result_db))
+    row1 = searchUserInfo(uid)
+    Standard_nutrient = (row1['height'] - 100)*0.9*35
+    def food_Dict(Standard_nutrient):
+        dic = dict()
+        nutrient_tuple=['carbo','protein','fat','sugar','satfat','transfat']
+        percent = [0.60,0.14,0.2,0.15,0.07,0.01]
+        g = [4,4,9,4,100,1000]
+        for n in range(0,6):
+            x= int((Standard_nutrient*percent[n])/g[n])
+            y = nutrient_tuple[n]
+            dic[y] = x
+        return(dic)
+    print('dailyData =>',dailyData(uid),'&& uid =>', uid)
+    print('weeklyData =>',weeklyData(uid),'&& uid =>', uid)
+    print('monthlyData =>',monthlyData(uid),'&& uid =>', uid)
+    return render_template('mypage.html',
+                    foods=add_result_db,
+                    count=len(add_result_db),
+                    info = searchFoodNutrient(uid),
+                    myinfo = searchUserInfo(uid),
+                    nutrient = food_Dict(Standard_nutrient),
+                    daily=dailyData(uid), 
+                    weekly = weeklyData(uid),
+                    monthly = monthlyData(uid)
+                    )
 
 @app.route('/add',methods=['POST'])
 def add():
