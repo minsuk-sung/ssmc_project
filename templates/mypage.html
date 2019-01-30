@@ -10,85 +10,93 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
-    <style>
-      #jb-container {
-        margin: 0px auto;
-        padding: 20px;
-      }
-      #jb-header {
-        padding: 20px;
-        margin-bottom: 20px;
-        border: 1px solid #bcbcbc;
-        border-radius: 10px;
-      }
-      #jb-content {
-        width: 200px;
-        padding: 20px;
-        float: left;
-        border: 1px solid #bcbcbc;
-        border-radius: 10px;
-      }
-      #jb-sidebar {
-        width: 1000px;
-        padding: 10px;
-        height: 300px;
-        margin:30 0 30 30;
-        margin:0 auto;
-        overflow: hidden;
-      }
-      #morrisBar{
-        width: 1000px;
-        height:100px;
-        background-color:white;
-        float: left;
-     }
-      #jb-sidebar1 {
-        width: 1000px;
-        padding: 10px;
-        height: 380px;
-        margin:30 0 30 30;
-        margin:0 auto;
-        overflow: hidden;
-      }
-      #morrisDonut{
-        
-        float: left;
-     }
-     #morrisDonut1{
-     
-      float: left;
-   }
-   #morrisDonut2{
-     
-      float: left;
-   }
-      #jb-footer {
-        width: 100%;
-        height:300px;
-        clear: both;
-        padding: 10px;
-       
-      }
+<style>
+  #jb-container {
+    margin: 0px auto;
+    padding: 20px;
+  }
+  #jb-header {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+  }
+  #jb-content {
+    width: 200px;
+    padding: 20px;
+    float: left;
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+  }
+  #jb-sidebar {
+    width: 1000px;
+    padding: 10px;
+    height: 300px;
+    margin:30 0 30 30;
+    margin:0 auto;
+    overflow: hidden;
+  }
+  #morrisBar{
+    width: 1000px;
+    height:100px;
+    background-color:white;
+    float: left;
+  }
+  #jb-sidebar1 {
+    width: 1000px;
+    padding: 10px;
+    height: 380px;
+    margin:30 0 30 30;
+    margin:0 auto;
+    overflow: hidden;
+  }
+  #morrisDonut{
+    
+    float: left;
+  }
+  #morrisDonut1{
+  
+  float: left;
+}
+#morrisDonut2{
+  
+  float: left;
+}
+  #jb-footer {
+    width: 100%;
+    height:300px;
+    clear: both;
+    padding: 10px;
+    
+  }
 
-      #cap-area{
-        height:60px;
-        overflow: hidden;
-    }
-    </style>
+#cap-area{
+  height:60px;
+  overflow: hidden;
+}
+a{
+text-decoration: none;
+color:black;
+  
+}
+b{
+	float:right;
+	margin-top:30px;
+  padding-right: 30px;
+  
+}
+</style>
   </head>
   <body>
     <div id="cap-area">
         <div id="cap-area">
-                <div style="float:right; margin-top:30px;">
-                    <a href="http://localhost:5000/logout"><b>Logout</b></a>
-                    <b>&nbsp|&nbsp</b>
-                    <a href="http://localhost:5000/mypage"><b>Mypage</b></a>
-                    <!-- <a href=""><img src="/static/images/login.png" width="80" height"80"/></a> -->
+                <div style="float:right; padding-right:100px">
+                    <a href="http://localhost:5000/logout" ><b>Logout</b></a>
                 </div>
-                <div>
-                        <!-- 메인 이름,사진 -->
-                        <a href="http://localhost:5000/"><img src="/static/images/logo.png" width='300' height="70" style="margin:3 0 0 30"></a>
-                    </div>
+              <div>
+                  <!-- 메인 이름,사진 -->
+                  <a href="http://localhost:5000/"><img src="/static/images/logo.png" width='300' height="70" style="margin:3 0 0 30"></a>
+              </div>
                        
         </div>
     </div>
@@ -111,95 +119,30 @@
         
       </div>
       <div id="jb-sidebar">
-            <body> 
-                  <span  id = 'morrisBar' style="height: 300px; width: 100%"></span>        
-            <script>    
-                  Morris.Bar({
-                 element: 'morrisBar',
-                 data: [
-                 { y: '탄수화물', a: {{daily['carboSum']}}, b: {{nutrient['carbo']}} },
-                 { y: '단백질', a: {{daily['proteinSum']}}, b: {{nutrient['protein']}} },
-                 { y: '지방', a: {{daily['fatSum']}}, b: {{nutrient['fat']}} },
-                 { y: '당류', a: {{daily['sugarSum']}}, b: {{nutrient['fat']}} },
-                 { y: '나트륨', a: {{daily['fatSum']}}, b: 4000 },
-                 { y: '콜레스테롤', a: {{daily['fatSum']}}, b: 300 }
-                
-                   ],
-                     xkey: 'y',
-                     ykeys: ['a', 'b'],
-                     labels: ['나의 영양소', '권장 영양소 '],
-                     barColors : ['#23c90e','#cff90e']
-                    
-                 });
-
-            
-          </script>
-        </body>
+          {% if foods: %}
+            {%include 'sub/result.html' ignore missing%}
+          {% else: %}
+            {%include 'sub/nresult.html' ignore missing%}
+          {% endif %}
       </div>
       <div id="jb-content"  style="border:0px">
             <img src="/static/images/avocado.png" width='100' height="100" style="margin:3 0 0 30">
             <img src="/static/images/tomato.png" width='150' height="150" style="margin:3 0 0 30">
-            
+        </div>
       </div>
       <div id="jb-sidebar1">
-        
-        <body>
-                
-                <span  id = 'morrisDonut' style="height: 300px; width: 33%"><h1 style="text-align: center">Daily</h1></span>
-                
-      <script>    
-            new Morris.Donut({
-               element: 'morrisDonut',
-               data: [
-                  {label: "탄수화물", value: {{daily['carboSum']}}},
-                  {label: "단백질", value: {{daily['proteinSum']}}},
-                  {label: "지방", value: {{daily['fatSum']}}}],
-                  colors: ['#23c90e','#cff90e','#f2de0c'] 
-                   });
-      </script>
-          
-          <span  id = 'morrisDonut1' style="height: 300px; width: 33%"><h1 style="text-align: center">Weekly</h1></span>     
-
-      <script>    
-            new Morris.Donut({
-               element: 'morrisDonut1',
-               data: [
-                  {label: "탄수화물", value: {{weekly['carboSum']}}},
-                  {label: "단백질", value: {{weekly['proteinSum']}}},
-                  {label: "지방", value: {{weekly['fatSum']}}}],
-                  colors: ['#23c90e','#cff90e','#f2de0c']
-                   });             
-      </script>
-          
-          <span  id = 'morrisDonut2' style="height: 300px; width: 33%"><h1 style="text-align: center">Monthly</h1></span>     
-
-      <script>    
-            new Morris.Donut({
-               element: 'morrisDonut2',
-               data: [
-                  {label: "탄수화물", value: {{monthly['carboSum']}}},
-                  {label: "단백질", value: {{monthly['proteinSum']}}},
-                  {label: "지방", value: {{monthly['fatSum']}}}],
-                  colors: ['#23c90e','#cff90e','#f2de0c']
-                   });
-                   
-                   
-      </script>
-        </body>
+          {% if foods: %}
+            {%include 'sub/result2.html' ignore missing%}
+          {% endif %}
       </div>
 
 
-
+      {% if foods: %}
       <div id="jb-footer">
-        <div>
-            {% if foods: %}
+        <div>     
                 {% include 'sub/addedtable.html' ignore missing %}
-            {% endif %} 
             </div>
-            
-            
-           
-      
+            {% endif %} 
     </div>
    
   </body>

@@ -1,0 +1,43 @@
+<body>
+                
+    <span  id = 'morrisDonut' style="height: 300px; width: 33%"><h1 style="text-align: center">Daily</h1></span>
+    
+<script>    
+new Morris.Donut({
+   element: 'morrisDonut',
+   data: [
+      {label: "탄수화물", value: {{daily['carboSum']}}},
+      {label: "단백질", value: {{daily['proteinSum']}}},
+      {label: "지방", value: {{daily['fatSum']}}}],
+      colors: ['#23c90e','#cff90e','#f2de0c'] 
+       });
+</script>
+
+<span  id = 'morrisDonut1' style="height: 300px; width: 33%"><h1 style="text-align: center">Weekly</h1></span>     
+
+<script>    
+new Morris.Donut({
+   element: 'morrisDonut1',
+   data: [
+      {label: "탄수화물", value: {{weekly['carboSum']}}},
+      {label: "단백질", value: {{weekly['proteinSum']}}},
+      {label: "지방", value: {{weekly['fatSum']}}}],
+      colors: ['#23c90e','#cff90e','#f2de0c']
+       });             
+</script>
+
+<span  id = 'morrisDonut2' style="height: 300px; width: 33%"><h1 style="text-align: center">Monthly</h1></span>     
+
+<script>    
+new Morris.Donut({
+   element: 'morrisDonut2',
+   data: [
+      {label: "탄수화물", value: {{monthly['carboSum']}}},
+      {label: "단백질", value: {{monthly['proteinSum']}}},
+      {label: "지방", value: {{monthly['fatSum']}}}],
+      colors: ['#23c90e','#cff90e','#f2de0c']
+       });
+       
+       
+</script>
+</body>
