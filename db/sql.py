@@ -671,6 +671,163 @@ def monthlyData(uid):
         if connection:
             connection.close()
     return mydict
+
+def dailyDataPersent(uid):
+    connection = None
+    row = None # 로그인 결과를 담는 변수
+    mydict1 = None
+    try:
+        connection = my.connect(host='localhost', # DB 주소
+                                user='root',      # DB 접속 계정
+                                password='12341234', # DB 접속 비번
+                                db='ssmc_project',   # Database 이름
+                                #port=3306,        # Port     
+                                charset='utf8',
+                                cursorclass=my.cursors.DictCursor) # Cursor Type
+
+        if connection:
+            #####################################################
+            with connection.cursor() as cursor:
+                sql = '''
+                    select *
+                        from meals
+                            left outer join food
+                                on meals.fid = food.fid
+                        where meals.uid = '%s' and meals.date > '%s'
+                ''' % (uid, datetime.date.today() - datetime.timedelta(days = 1))
+                cursor.execute( sql )
+                cursor.execute( sql )
+                row    = cursor.fetchall()  # 하나의 row를 뽑을때
+                mydict={
+                    'carboSum':0,
+                    'proteinSum':0,
+                    'fatSum':0,
+                    'mySum':0
+
+                    }
+                for i in row:
+                    mydict['carboSum']+=int(float(i['carbo'])*4)
+                    mydict['proteinSum']+=int(float(i['protein'])*4)
+                    mydict['fatSum']+=int(float(i['fat'])*9)
+                mydict['mySum'] = mydict['carboSum']+mydict['proteinSum']+mydict['fatSum']
+                print('mysum=>',mydict['mySum'])
+                mydict['carboSum']=int((mydict['carboSum']/mydict['mySum'])*100)
+                mydict['proteinSum']=int((mydict['proteinSum']/mydict['mySum'])*100)
+                mydict['fatSum']=int((mydict['fatSum']/mydict['mySum'])*100)
+            #####################################################
+    except Exception as e:
+        print('- weeklyData-> ', e)
+        row = None
+    finally:
+        if connection:
+            connection.close()
+    return mydict
+
+
+
+
+def weeklyDataPersent(uid):
+    connection = None
+    row = None # 로그인 결과를 담는 변수
+    mydict1 = None
+    try:
+        connection = my.connect(host='localhost', # DB 주소
+                                user='root',      # DB 접속 계정
+                                password='12341234', # DB 접속 비번
+                                db='ssmc_project',   # Database 이름
+                                #port=3306,        # Port     
+                                charset='utf8',
+                                cursorclass=my.cursors.DictCursor) # Cursor Type
+
+        if connection:
+            #####################################################
+            with connection.cursor() as cursor:
+                sql = '''
+                    select *
+                        from meals
+                            left outer join food
+                                on meals.fid = food.fid
+                        where meals.uid = '%s' and meals.date > '%s'
+                ''' % (uid, datetime.date.today() - datetime.timedelta(days = 7))
+                cursor.execute( sql )
+                cursor.execute( sql )
+                row    = cursor.fetchall()  # 하나의 row를 뽑을때
+                mydict={
+                    'carboSum':0,
+                    'proteinSum':0,
+                    'fatSum':0,
+                    'mySum':0
+
+                    }
+                for i in row:
+                    mydict['carboSum']+=int(float(i['carbo'])*4)
+                    mydict['proteinSum']+=int(float(i['protein'])*4)
+                    mydict['fatSum']+=int(float(i['fat'])*9)
+                mydict['mySum'] = mydict['carboSum']+mydict['proteinSum']+mydict['fatSum']
+                print('mysum=>',mydict['mySum'])
+                mydict['carboSum']=int((mydict['carboSum']/mydict['mySum'])*100)
+                mydict['proteinSum']=int((mydict['proteinSum']/mydict['mySum'])*100)
+                mydict['fatSum']=int((mydict['fatSum']/mydict['mySum'])*100)
+            #####################################################
+    except Exception as e:
+        print('- weeklyData-> ', e)
+        row = None
+    finally:
+        if connection:
+            connection.close()
+    return mydict
+
+def monthlyDataPersent(uid):
+    connection = None
+    row = None # 로그인 결과를 담는 변수
+    mydict1 = None
+    try:
+        connection = my.connect(host='localhost', # DB 주소
+                                user='root',      # DB 접속 계정
+                                password='12341234', # DB 접속 비번
+                                db='ssmc_project',   # Database 이름
+                                #port=3306,        # Port     
+                                charset='utf8',
+                                cursorclass=my.cursors.DictCursor) # Cursor Type
+
+        if connection:
+            #####################################################
+            with connection.cursor() as cursor:
+                sql = '''
+                    select *
+                        from meals
+                            left outer join food
+                                on meals.fid = food.fid
+                        where meals.uid = '%s' and meals.date > '%s'
+                ''' % (uid, datetime.date.today() - datetime.timedelta(days = 30))
+                cursor.execute( sql )
+                cursor.execute( sql )
+                row    = cursor.fetchall()  # 하나의 row를 뽑을때
+                mydict={
+                    'carboSum':0,
+                    'proteinSum':0,
+                    'fatSum':0,
+                    'mySum':0
+
+                    }
+                for i in row:
+                    mydict['carboSum']+=int(float(i['carbo'])*4)
+                    mydict['proteinSum']+=int(float(i['protein'])*4)
+                    mydict['fatSum']+=int(float(i['fat'])*9)
+                mydict['mySum'] = mydict['carboSum']+mydict['proteinSum']+mydict['fatSum']
+                print('mysum=>',mydict['mySum'])
+                mydict['carboSum']=int((mydict['carboSum']/mydict['mySum'])*100)
+                mydict['proteinSum']=int((mydict['proteinSum']/mydict['mySum'])*100)
+                mydict['fatSum']=int((mydict['fatSum']/mydict['mySum'])*100)
+            #####################################################
+    except Exception as e:
+        print('- weeklyData-> ', e)
+        row = None
+    finally:
+        if connection:
+            connection.close()
+    return mydict
+
 if __name__ == '__main__':
     # ajax에서 음식 리스트 찾는 연습
     # print('-'*50)
