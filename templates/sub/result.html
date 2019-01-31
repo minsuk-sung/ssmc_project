@@ -4,27 +4,86 @@
 </head>
 
 <body> 
-<span  id = 'morrisBar' style="height: 300px; width: 100%"></span>        
+<span  id = 'morrisBar' style="height: 300px; width: 20%"></span>        
 <script>    
     Morris.Bar({
     element: 'morrisBar',
     data: [
-    { y: '탄수화물', a: {{(daily['carboSum']/nutrient['carbo'])*100}}, b: {{100}} },
-    { y: '단백질', a: {{(daily['proteinSum']/nutrient['protein'])*100}}, b: {{100}} },
-    { y: '지방', a: {{(daily['fatSum']/nutrient['fat'])*100}}, b: {{100}} },
-    { y: '당류', a: {{(daily['sugarSum']/nutrient['fat'])*100}}, b: {{100}} },
-    { y: '나트륨', a: {{(daily['fatSum']/4000)*100}}, b: 100 },
-    { y: '콜레스테롤', a: {{(daily['fatSum']/300)*100}}, b: 100 }
+    { y: '탄수화물', a: {{info['carboSum']}}, b: {{nutrient['carbo'] }}}
     
         ],
         xkey: 'y',
         ykeys: ['a', 'b'],
         labels: ['나의 영양소', '권장 영양소 '],
-        barColors : ['#23c90e','#cff90e']
+        barColors : ['#23c90e','#ff6100'],
+        hideHover :'auto'
         
     });
-
-  
-</script>
+    </script>
+    <span  id = 'morrisBar1' style="height: 300px; width: 20%"></span> 
+    <script> 
+    Morris.Bar({
+    element: 'morrisBar1',
+    data: [
+    { y: '단백질', a: {{info['proteinSum']}}, b: {{nutrient['protein'] }}}
+    
+    
+        ],
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['나의 영양소', '권장 영양소 '],
+        barColors : ['#23c90e','#ff6100'],
+        hideHover :'auto'
+        
+    });
+    </script>
+    <span  id = 'morrisBar2' style="height: 300px; width: 20%"></span>        
+    <script>    
+    Morris.Bar({
+    element: 'morrisBar2',
+    data: [
+    { y: '지방', a: {{info['fatSum']}}, b: {{nutrient['fat'] }}}
+    
+        ],
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['나의 영양소', '권장 영양소 '],
+        barColors : ['#23c90e','#ff6100'],
+        hideHover :'auto'
+        
+    });
+    </script>
+    <span  id = 'morrisBar3' style="height: 300px; width: 20%"></span>        
+    <script>    
+    Morris.Bar({
+    element: 'morrisBar3',
+    data: [
+    { y: '당류', a: {{info['sugarSum']}}, b: {{nutrient['sugar'] }}}
+    
+        ],
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['나의 영양소', '권장 영양소 '],
+        barColors : ['#23c90e','#ff6100'],
+        hideHover :'auto'
+        
+    });
+    </script>
+    <span  id = 'morrisBar4' style="height: 300px; width: 20%"></span>        
+    <script>    
+    Morris.Bar({
+    element: 'morrisBar4',
+    data: [
+    { y: '나트륨', a: {{info['natriumSum']}}, b: 4000}
+    
+        ],
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['나의 영양소', '권장 영양소 '],
+        barColors : ['#23c90e','#ff6100'],
+        hideHover :'auto'
+        
+    });
+    </script>
 </body>
 </html>
