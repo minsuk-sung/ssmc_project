@@ -91,7 +91,10 @@ def mypage():
                     nutrient = food_Dict(Standard_nutrient),
                     daily=dailyData(uid), 
                     weekly = weeklyData(uid),
-                    monthly = monthlyData(uid)
+                    monthly = monthlyData(uid),
+                    dailyPersent = dailyDataPersent(uid),
+                    weeklyPersent = weeklyDataPersent(uid),
+                    monthlyPersent = monthlyDataPersent(uid)
                     )
 
 @app.route('/add',methods=['POST'])
