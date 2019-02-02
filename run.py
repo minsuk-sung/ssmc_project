@@ -1,6 +1,10 @@
 from flask import Flask, render_template ,url_for, request, redirect, session, jsonify
 from db.sql import *
+from urllib.request import urlopen,Request
+import urllib
+import json
 import os
+from wordcloud import WordCloud
 
 app=Flask(__name__)
 
@@ -10,6 +14,7 @@ app.secret_key= 'qweasdzxc'
 @app.route('/')
 def main():
     return render_template('main.html')
+
 # 로그인
 @app.route('/login',methods=['POST'])
 def login():

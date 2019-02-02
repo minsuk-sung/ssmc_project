@@ -138,6 +138,35 @@ def searchFoods(foodname):
             print('DB Close : Find Food')
     return row
 
+def Wordcloud():
+    connection = None
+    row = None # 로그인 결과를 담는 변수
+    try:
+        connection = my.connect(host='localhost', # DB 주소
+                                user='root',      # DB 접속 계정
+                                password='12341234', # DB 접속 비번
+                                db='ssmc_project',   # Database 이름
+                                #port=3306,        # Port     
+                                charset='utf8',
+                                cursorclass=my.cursors.DictCursor) # Cursor Type
+
+        if connection:
+            print('DB OPEN : Find Food')
+            #####################################################
+            with connection.cursor() as cursor:
+                sql    = "select fid,COUNT(*) as cnt FROM meals group by fid ordey by cnt;"
+                cursor.execute( sql )
+                row    = cursor.fetchall()  # 하나의 row를 뽑을때
+            #####################################################
+    except Exception as e:
+        print('->', e)
+        row = None
+    finally:
+        if connection:
+            connection.close()
+            print('DB Close : Find Food')
+    return row
+
 # DB로 먹은 음식 데이터 
 def insertFoodData(uid,fid,inbun):
     connection = None
